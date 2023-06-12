@@ -3,6 +3,11 @@ TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
 node {
     def docker_image
 
+    stage('Initialize') {
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
+
     stage('Checkout') {
         checkout scm
     }
@@ -20,6 +25,7 @@ node {
     stage('Push') {
         docker.withRegistry(TARGET_CLUSTER['REGISTRY_URI'], TARGET_CLUSTER['REGISTRY_CREDENTIALS_ID']) {
             docker_image.push(IMAGE_TAG)
+            docker_image.push("latest")
         }
     }
 
