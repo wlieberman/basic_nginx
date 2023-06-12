@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: basic_nginx
+  labels:
+    name: basic_nginx
+spec:
+  rules:
+  - host: basic-nginx.downstream.billylieberman.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: basic_nginx
+            port: 
+              number: 80

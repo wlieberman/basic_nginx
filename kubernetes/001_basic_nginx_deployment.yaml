@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic_nginx
+spec:
+  selector:
+    matchLabels:
+      app: basic_nginx
+  template:
+    metadata:
+      labels:
+        app: basic_nginx
+    spec:
+      containers:
+      - name: basic_nginx
+        image: basic_nginx:0.0.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 80
