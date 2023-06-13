@@ -1,7 +1,12 @@
 IMAGE_REPOSITORY = "basic_nginx"
 TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            cloud 'kubernetes'
+            inheritFrom 'default'
+        }
+    }
 
     // def docker_image
 
@@ -22,6 +27,7 @@ pipeline {
             steps {
                 container ('docker') {
                     script {
+                        checkout scm
                         docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
                     }
                 }
