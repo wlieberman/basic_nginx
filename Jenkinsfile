@@ -4,7 +4,7 @@ pipeline {
     agent {
         kubernetes {
             cloud 'kubernetes'
-            inheritFrom 'default'
+            // inheritFrom 'default'
         }
     }
     // def docker_image
@@ -17,10 +17,8 @@ pipeline {
     stages { 
         stage('Checkout') {
             steps { 
-                container ('jnlp') {
-                    //checkout scm
-                    sh "ls -la"
-                }
+                //checkout scm
+                sh "ls -la"
             }
         }
 
