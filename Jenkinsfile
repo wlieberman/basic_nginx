@@ -36,15 +36,15 @@ node {
 
 }
 
-pipeline {
-    agent {
-        docker { image 'docker' }
-    }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'echo "hello world!"'
-            }
-        }
-    }
-}
+// pipeline {
+    // agent {
+        // docker { image 'docker' }
+    // }
+    // stages {
+        // stage('Test') {
+            // steps {
+                // sh 'echo "hello world!"'
+            // }
+        // }
+    // }
+// }
