@@ -41,7 +41,7 @@ pipeline {
                         }
                         // sh "echo username=$REGISTRY_CREDENTIALS_USR"
                         // sh "echo password=$REGISTRY_CREDENTIALS_PSW"
-                        sh 'declare'
+                        sh 'printenv'
                     }
                 }
             }
