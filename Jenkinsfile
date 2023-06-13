@@ -1,8 +1,13 @@
 IMAGE_PROJECT = "basic_nginx"
 IMAGE_REPOSITORY = "basic_nginx"
 IMAGE_REGISTRY = "harbor.downstream.billylieberman.com"
+IMAGE_TAG = ${env.BUILD_ID}
 // docker push harbor.downstream.billylieberman.com/basic_nginx/REPOSITORY[:TAG]
 IMAGE_NAME="${IMAGE_REGISTRY}/${IMAGE_PROJECT}/${IMAGE_REPOSITORY}:${env.BUILD_ID}"
+
+REGISTRY_CREDENTIALS_ID = credentials('harbor-jenkins-username')
+REGISTRY_CREDENTIALS_PW = credentials('harbor-jenkins-pw')
+
 pipeline {
     agent {
         kubernetes {
@@ -10,17 +15,6 @@ pipeline {
             inheritFrom 'default'
         }
     }
-
-
-    // podTemplate(containers: [
-        // containerTemplate(name: 'docker', image: 'docker:latest', command: 'sleep', args: '99d')
-    // ])
-    // def docker_image
-
-    // stage('Initialize') {
-        // def dockerHome = tool 'myDocker'
-        // env.PATH = "${dockerHome}/bin:${env.PATH}"
-    // }
 
     stages { 
         stage('Checkout') {
@@ -39,25 +33,39 @@ pipeline {
                 container ('docker') {
                     script {
                         // checkout scm
-                        docker_image = docker.build("${IMAGE_NAME}")
+                        docker_image = docker.build("${image_name}")
                         // sh "ls -la"
                     }
                 }
             }
         }
 
-        // stage('Unit Tests') {
-            // docker_image.inside {
-                // sh 'echo "Tests passed"'
-            // }
-        // }
+        stage('Unit Tests') {
+            steps {
+                container ('docker') {
+                    script {
+                        // checkout scm
+                        sh "echo \"Tests Passed!\""
+                    }
+                }
+            }
+        }
 
-        // stage('Push') {
-            // docker.withRegistry(TARGET_CLUSTER['REGISTRY_URI'], TARGET_CLUSTER['REGISTRY_CREDENTIALS_ID']) {
-                // docker_image.push(IMAGE_TAG)
-                // docker_image.push("latest")
-            // }
-        // }
+        stage('Push') {
+            steps {
+                container ('docker') {
+                    script {
+                        // checkout scm
+                        sh "echo "
+                    }
+                }
+            }
+            
+            docker.withRegistry("${IMAGE_REGISTRY}", 'harbor-jenkins') {
+                docker_image.push(IMAGE_TAG)
+                docker_image.push("latest")
+            }
+        }
 
         // stage('Deploy to Development') {}
         // stage('Integration Tests') {}
