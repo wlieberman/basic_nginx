@@ -3,10 +3,10 @@ TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
 node {
     def docker_image
 
-    stage('Initialize') {
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
+    // stage('Initialize') {
+        // def dockerHome = tool 'myDocker'
+        // env.PATH = "${dockerHome}/bin:${env.PATH}"
+    // }
 
     stage('Checkout') {
         checkout scm
