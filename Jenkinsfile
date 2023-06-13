@@ -12,9 +12,9 @@ node {
         checkout scm
     }
 
-    // stage('Build') {
-        // docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
-    // }
+    stage('Build') {
+        docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+    }
 
     // stage('Unit Tests') {
         // docker_image.inside {
