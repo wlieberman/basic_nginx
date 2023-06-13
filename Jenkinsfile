@@ -4,7 +4,7 @@ pipeline {
     agent {
         kubernetes {
             cloud 'kubernetes'
-            // inheritFrom 'default'
+            inheritFrom 'default'
         }
     }
     // def docker_image
