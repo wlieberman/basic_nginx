@@ -17,8 +17,11 @@ pipeline {
     stages { 
         stage('Checkout') {
             steps { 
-                //checkout scm
-                sh "ls -la"
+                container ('docker') {
+                    script {
+                        //checkout scm
+                        sh "ls -la"
+                    }
             }
         }
 
