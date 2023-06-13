@@ -46,7 +46,7 @@ pipeline {
                 container ('docker') {
                     script {
                         // checkout scm
-                        sh "docker login -u ${}"
+                        // sh "docker login -u ${}"
                         // environment {
                             // DOCKER_TLS_VERIFY=0
                         // }
