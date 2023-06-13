@@ -1,5 +1,8 @@
+IMAGE_PROJECT = "basic_nginx"
 IMAGE_REPOSITORY = "basic_nginx"
-TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
+IMAGE_REGISTRY = "harbor.downstream.billylieberman.com"
+// docker push harbor.downstream.billylieberman.com/basic_nginx/REPOSITORY[:TAG]
+IMAGE_NAME="${IMAGE_REGISTRY}/${IMAGE_PROJECT}/${IMAGE_REPOSITORY}:${env.BUILD_ID}"
 pipeline {
     agent {
         kubernetes {
@@ -36,7 +39,7 @@ pipeline {
                 container ('docker') {
                     script {
                         // checkout scm
-                        docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+                        docker_image = docker.build("${IMAGE_NAME}")
                         // sh "ls -la"
                     }
                 }
