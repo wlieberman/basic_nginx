@@ -56,6 +56,7 @@ pipeline {
                 container ('docker') {
                     script {
                         // checkout scm
+                        DOCKER_TLS_VERIFY=0
                         docker.withRegistry("http://${IMAGE_REGISTRY}", 'harbor-jenkins') {
                             docker_image.push(${IMAGE_TAG})
                             docker_image.push("latest")
