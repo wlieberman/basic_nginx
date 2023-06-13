@@ -22,6 +22,7 @@ pipeline {
                         //checkout scm
                         sh "ls -la"
                     }
+                }
             }
         }
 
