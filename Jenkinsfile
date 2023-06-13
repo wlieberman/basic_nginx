@@ -17,25 +17,23 @@ pipeline {
     stages { 
         stage('Checkout') {
             steps { 
-                container ('docker') {
-                    script {
-                        //checkout scm
-                        sh "ls -la"
-                    }
+                container ('jnlp') {
+                    //checkout scm
+                    sh "ls -la"
                 }
             }
         }
 
-        stage('Build') {
-            steps {
-                container ('docker') {
-                    script {
-                        checkout scm
-                        docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
-                    }
-                }
-            }
-        }
+        // stage('Build') {
+            // steps {
+                // container ('docker') {
+                    // script {
+                        // checkout scm
+                        // docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+                    // }
+                // }
+            // }
+        // }
 
         // stage('Unit Tests') {
             // docker_image.inside {
