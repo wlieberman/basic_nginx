@@ -56,15 +56,14 @@ pipeline {
                 container ('docker') {
                     script {
                         // checkout scm
-                        sh "echo "
+                        docker.withRegistry("${IMAGE_REGISTRY}", 'harbor-jenkins') {
+                            docker_image.push(IMAGE_TAG)
+                            docker_image.push("latest")
+                        }
                     }
                 }
             }
             
-            docker.withRegistry("${IMAGE_REGISTRY}", 'harbor-jenkins') {
-                docker_image.push(IMAGE_TAG)
-                docker_image.push("latest")
-            }
         }
 
         // stage('Deploy to Development') {}
