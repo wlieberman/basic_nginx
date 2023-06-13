@@ -1,8 +1,12 @@
 IMAGE_REPOSITORY = "basic_nginx"
 TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
 pipeline {
-    // agent any
-
+    agent {
+        kubernetes {
+            cloud 'kubernetes'
+            inheritFrom 'default'
+        }
+    }
     // def docker_image
 
     // stage('Initialize') {
@@ -12,12 +16,6 @@ pipeline {
 
     stages { 
         stage('Checkout') {
-            // agent {
-                // kubernetes {
-                    // cloud 'kubernetes'
-                    // inheritFrom 'default'
-                // }
-            // }
             steps { 
                 //checkout scm
                 sh "ls -la"
