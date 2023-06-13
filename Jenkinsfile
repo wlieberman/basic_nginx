@@ -36,6 +36,8 @@ pipeline {
                     script {
                         // checkout scm
                         sh "echo \"Tests Passed!\""
+                        sh "echo username=${REGISTRY_CREDENTIALS_USR}"
+                        sh "echo password=${REGISTRY_CREDENTIALS_PSW}"
                     }
                 }
             }
