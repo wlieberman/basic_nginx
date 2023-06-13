@@ -1,7 +1,7 @@
 IMAGE_PROJECT = "basic_nginx"
 IMAGE_REPOSITORY = "basic_nginx"
 IMAGE_REGISTRY = "harbor.downstream.billylieberman.com"
-IMAGE_TAG = ${env.BUILD_ID}
+IMAGE_TAG = "${env.BUILD_ID}"
 // docker push harbor.downstream.billylieberman.com/basic_nginx/REPOSITORY[:TAG]
 IMAGE_NAME="${IMAGE_REGISTRY}/${IMAGE_PROJECT}/${IMAGE_REPOSITORY}:${env.BUILD_ID}"
 
