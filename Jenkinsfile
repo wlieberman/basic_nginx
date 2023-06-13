@@ -13,7 +13,13 @@ node {
     }
 
     stage('Build') {
-        docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+        steps {
+            container ('docker') {
+                script {
+                    docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+                }
+            }
+        }
     }
 
     // stage('Unit Tests') {
