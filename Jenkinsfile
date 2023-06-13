@@ -12,12 +12,12 @@ pipeline {
 
     stages { 
         stage('Checkout') {
-            agent {
-                kubernetes {
-                    cloud 'kubernetes'
-                    inheritFrom 'default'
-                }
-            }
+            // agent {
+                // kubernetes {
+                    // cloud 'kubernetes'
+                    // inheritFrom 'default'
+                // }
+            // }
             steps { 
                 //checkout scm
                 sh "ls -la"
