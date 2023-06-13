@@ -1,11 +1,10 @@
 IMAGE_REPOSITORY = "basic_nginx"
 TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
-node {
+pipeline {
     def docker_image
 
-    stage('Initialize') {
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    agent {
+        docker { image 'docker' }
     }
 
     stage('Checkout') {
@@ -38,7 +37,7 @@ node {
 
 pipeline {
     agent {
-        docker { image 'basic_nginx:1.25.0' }
+        docker { image 'docker' }
     }
     stages {
         stage('Test') {
