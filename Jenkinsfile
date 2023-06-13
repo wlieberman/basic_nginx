@@ -59,7 +59,7 @@ pipeline {
                         environment {
                             REGISTRY_CREDENTIALS = credentials('harbor-jenkins')
                         }
-                        docker.withRegistry("http://${IMAGE_REGISTRY}", "${REGISTRY_CREDENTIALS}") {
+                        docker.withRegistry("http://${IMAGE_REGISTRY}", $REGISTRY_CREDENTIALS) {
                             docker_image.push(${IMAGE_TAG})
                             docker_image.push("latest")
                         }
