@@ -33,7 +33,7 @@ pipeline {
                 container ('docker') {
                     script {
                         // checkout scm
-                        docker_image = docker.build("${image_name}")
+                        docker_image = docker.build("${IMAGE_NAME}")
                         // sh "ls -la"
                     }
                 }
