@@ -17,8 +17,12 @@ pipeline {
     stages { 
         stage('Checkout') {
             steps { 
-                //checkout scm
-                sh "ls -la"
+                container('jnlp') {
+                    script {
+                        //checkout scm
+                        sh "ls -la"
+                    }
+                }
             }
         }
 
