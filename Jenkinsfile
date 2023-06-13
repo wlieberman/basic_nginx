@@ -1,44 +1,51 @@
 IMAGE_REPOSITORY = "basic_nginx"
 TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
-node {
-    def docker_image
+pipeline {
+    agent any
+
+    // def docker_image
 
     // stage('Initialize') {
         // def dockerHome = tool 'myDocker'
         // env.PATH = "${dockerHome}/bin:${env.PATH}"
     // }
 
-    stage('Checkout') {
-        checkout scm
-    }
+    stages { 
+        stage('Checkout') {
+            steps { 
+                //checkout scm
+                sh "ls -la"
+            }
+        }
 
-    stage('Build') {
-        steps {
-            container ('docker') {
-                script {
-                    docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+        stage('Build') {
+            steps {
+                container ('docker') {
+                    script {
+                        docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+                    }
                 }
             }
         }
+
+        // stage('Unit Tests') {
+            // docker_image.inside {
+                // sh 'echo "Tests passed"'
+            // }
+        // }
+
+        // stage('Push') {
+            // docker.withRegistry(TARGET_CLUSTER['REGISTRY_URI'], TARGET_CLUSTER['REGISTRY_CREDENTIALS_ID']) {
+                // docker_image.push(IMAGE_TAG)
+                // docker_image.push("latest")
+            // }
+        // }
+
+        // stage('Deploy to Development') {}
+        // stage('Integration Tests') {}
+        // stage('Promote') {}
+        // stage('Deploy to Production') {}
     }
-
-    // stage('Unit Tests') {
-        // docker_image.inside {
-            // sh 'echo "Tests passed"'
-        // }
-    // }
-
-    // stage('Push') {
-        // docker.withRegistry(TARGET_CLUSTER['REGISTRY_URI'], TARGET_CLUSTER['REGISTRY_CREDENTIALS_ID']) {
-            // docker_image.push(IMAGE_TAG)
-            // docker_image.push("latest")
-        // }
-    // }
-
-    // stage('Deploy to Development') {}
-    // stage('Integration Tests') {}
-    // stage('Promote') {}
-    // stage('Deploy to Production') {}
 
 }
 
