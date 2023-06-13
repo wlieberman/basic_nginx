@@ -36,8 +36,8 @@ pipeline {
                 container ('docker') {
                     script {
                         // checkout scm
-                        //docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
-                        sh "ls -la"
+                        docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+                        // sh "ls -la"
                     }
                 }
             }
