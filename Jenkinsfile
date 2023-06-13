@@ -39,8 +39,9 @@ pipeline {
                         environment {
                             REGISTRY_CREDENTIALS = credentials('harbor-jenkins')
                         }
-                        sh "echo username=$REGISTRY_CREDENTIALS_USR"
-                        sh "echo password=$REGISTRY_CREDENTIALS_PSW"
+                        // sh "echo username=$REGISTRY_CREDENTIALS_USR"
+                        // sh "echo password=$REGISTRY_CREDENTIALS_PSW"
+                        sh 'declare'
                     }
                 }
             }
