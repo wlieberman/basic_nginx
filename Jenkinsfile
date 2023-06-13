@@ -1,7 +1,7 @@
 IMAGE_REPOSITORY = "basic_nginx"
 TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
 pipeline {
-    agent any
+    // agent any
 
     // def docker_image
 
