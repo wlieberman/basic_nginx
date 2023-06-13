@@ -1,10 +1,10 @@
 IMAGE_REPOSITORY = "basic_nginx"
 TARGET_CLUSTER_DOMAIN = "harbor.downstream.billylieberman.com"
 pipeline {
-    def docker_image
+    // def docker_image
+    agent any
 
     stages{
-        agent any
 
         stage('Checkout') {
             agent {
