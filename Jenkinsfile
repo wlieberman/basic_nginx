@@ -36,12 +36,12 @@ pipeline {
                     script {
                         // checkout scm
                         sh "echo \"Tests Passed!\""
-                        environment {
-                            REGISTRY_CREDENTIALS = credentials('harbor-jenkins')
-                        }
+                        // environment {
+                            // REGISTRY_CREDENTIALS = credentials('harbor-jenkins')
+                        // }
                         // sh "echo username=$REGISTRY_CREDENTIALS_USR"
                         // sh "echo password=$REGISTRY_CREDENTIALS_PSW"
-                        sh 'printenv'
+                        // sh 'printenv'
                     }
                 }
             }
