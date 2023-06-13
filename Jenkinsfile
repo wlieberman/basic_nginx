@@ -8,6 +8,7 @@ pipeline {
         }
     }
 
+    import com.foo.utils.PodTemplates
     podTemplates = new PodTemplates()
 
     podTemplates.dockerTemplate {
