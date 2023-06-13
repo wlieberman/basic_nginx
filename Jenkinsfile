@@ -9,7 +9,11 @@ pipeline {
             agent {
                 docker { image 'docker' }
             }
-            checkout scm
+            steps {
+                script {
+                    checkout scm
+                }
+            }
         }
 
         stage('Build') {
