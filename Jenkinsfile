@@ -57,7 +57,7 @@ pipeline {
                     script {
                         // checkout scm
                         docker.withRegistry("${IMAGE_REGISTRY}", 'harbor-jenkins') {
-                            docker_image.push(IMAGE_TAG)
+                            docker_image.push(${IMAGE_TAG})
                             docker_image.push("latest")
                         }
                     }
