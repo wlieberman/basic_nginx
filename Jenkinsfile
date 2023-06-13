@@ -5,11 +5,21 @@ pipeline {
         kubernetes {
             cloud 'kubernetes'
             // inheritFrom 'default'
-            containerTemplate {
-                name 'docker'
-                image 'docker:latest'
-                command 'sleep'
-                args '99d'
+            yaml '''
+                apiVersion: v1
+                kind: Pod
+                metadata:
+                labels:
+                    some-label: docker
+                spec:
+                containers:
+                - name: docker
+                    image: docker:latest
+                    command:
+                    - cat
+                    tty: true
+                '''
+            retries 2
             }
         }
     }
