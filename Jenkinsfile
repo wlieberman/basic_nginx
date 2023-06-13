@@ -4,6 +4,7 @@ pipeline {
     def docker_image
 
     stages{
+        agent any
 
         stage('Checkout') {
             agent {
