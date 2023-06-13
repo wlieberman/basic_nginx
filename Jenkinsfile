@@ -4,7 +4,7 @@ pipeline {
     agent {
         kubernetes {
             cloud 'kubernetes'
-            inheritFrom 'default'
+            // inheritFrom 'default'
         }
     }
     // def docker_image
@@ -26,16 +26,16 @@ pipeline {
             }
         }
 
-        // stage('Build') {
-            // steps {
-                // container ('docker') {
-                    // script {
+        stage('Build') {
+            steps {
+                container ('docker') {
+                    script {
                         // checkout scm
-                        // docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
-                    // }
-                // }
-            // }
-        // }
+                        docker_image = docker.build("basic_nginx.${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
 
         // stage('Unit Tests') {
             // docker_image.inside {
