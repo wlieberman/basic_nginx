@@ -4,23 +4,7 @@ pipeline {
     agent {
         kubernetes {
             cloud 'kubernetes'
-            // inheritFrom 'default'
-            yaml '''
-                apiVersion: v1
-                kind: Pod
-                metadata:
-                labels:
-                    some-label: docker
-                spec:
-                containers:
-                - name: docker
-                    image: docker:latest
-                    command:
-                    - cat
-                    tty: true
-                '''
-            retries 2
-            }
+            inheritFrom 'default'
         }
     }
 
