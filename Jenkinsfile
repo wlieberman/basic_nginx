@@ -73,12 +73,15 @@ pipeline {
 
         stage('Deploy to Development') {
             steps{
-                container('kubectl') {
-                    script{
-                        withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
-                            sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
-                        }
-                    }
+                // container('kubectl') {
+                    // script{
+                        // withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
+                            // sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
+                        // }
+                    // }
+                // }
+                container('docker') {
+                    sh "docker run rancher/kubectl:v1.24.14 apply -n ${NAMESPACE} -f kubernetes/*.yaml"
                 }
                 
             }
