@@ -55,12 +55,12 @@ pipeline {
                     script {
                         // checkout scm
                         // sh "docker login -u ${}"
-                        sh 'echo username: $HARBOR_CREDS_USR'
-                        sh 'echo $HARBOR_CREDS_PSW | docker login $IMAGE_REG -u $HARBOR_CREDS_USR --password-stdin'
-                        //docker.withRegistry("http://${IMAGE_REGISTRY}", $HARBOR_CREDS) {
-                            //docker_image.push(${IMAGE_TAG})
-                            //docker_image.push("latest")
-                        //}
+                        // sh 'echo username: $HARBOR_CREDS_USR'
+                        // sh 'echo $HARBOR_CREDS_PSW | docker login $IMAGE_REG -u $HARBOR_CREDS_USR --password-stdin'
+                        docker.withRegistry("https://${IMAGE_REGISTRY}", $HARBOR_CREDS) {
+                            docker_image.push(${IMAGE_TAG})
+                            docker_image.push("latest")
+                        }
                     }
                 }
             }
