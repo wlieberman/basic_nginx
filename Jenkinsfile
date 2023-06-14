@@ -26,7 +26,6 @@ pipeline {
                     script {
                         sh 'curl -LO https://dl.k8s.io/release/v1.25.9/bin/linux/amd64/kubectl'
                         sh 'chmod +x kubectl'
-                        sh 'mv kubectl /usr/bin'
                     }
                 }
             }
@@ -86,6 +85,7 @@ pipeline {
             steps{
                 container('jnlp') {
                     script{
+                        sh 'export PATH=$PATH:.'
                         withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
                             sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
                         }
