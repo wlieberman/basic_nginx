@@ -19,15 +19,10 @@ pipeline {
 
     stages { 
         stage('Build') {
-            environment {
-                HARBOR_CREDS = credentials('harbor-jenkins')
-            }
             steps {
                 container ('docker') {
                     script {
-                        echo "username: $HARBOR_CREDS_USR"
-                        echo "password: $HARBOR_CREDS_PSW"
-                        //docker_image = docker.build("${IMAGE_NAME}")
+                        docker_image = docker.build("${IMAGE_NAME}")
                     }
                 }
             }
@@ -51,23 +46,19 @@ pipeline {
         }
 
         stage('Push') {
+            environment {
+                HARBOR_CREDS = credentials('harbor-jenkins')
+            }
             steps {
                 container ('docker') {
                     script {
                         // checkout scm
                         // sh "docker login -u ${}"
-                        // environment {
-                            // DOCKER_TLS_VERIFY=0
-                        // }
-                        //environment {
-                            //REGISTRY_CREDENTIALS = credentials('harbor-jenkins')
-                            //withCredentials([usernamePassword(credentialsId: 'harbor-jenkins', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
-                        //}
-                        sh 'echo username: $USERNAME'
-                        //docker.withRegistry("http://${IMAGE_REGISTRY}", $REGISTRY_CREDENTIALS) {
-                            //docker_image.push(${IMAGE_TAG})
-                            //docker_image.push("latest")
-                        //}
+                        sh 'echo username: $HARBOR_CREDS_USR'
+                        docker.withRegistry("http://${IMAGE_REGISTRY}", $HARBOR_CREDS) {
+                            docker_image.push(${IMAGE_TAG})
+                            docker_image.push("latest")
+                        }
                     }
                 }
             }
