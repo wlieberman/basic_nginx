@@ -62,15 +62,11 @@ pipeline {
 
         stage('Push') {
             environment {
-                HARBOR_CREDS = credentials('harbor-jenkins')
                 IMAGE_REG = "$IMAGE_REGISTRY"
             }
             steps {
                 container ('docker') {
                     script {
-                        // checkout scm
-                        // sh "docker login -u ${}"
-                        // sh 'echo username: $HARBOR_CREDS_USR'
                         sh 'echo $REG_PW | docker login $IMAGE_REG -u $REG_USR --password-stdin'
                         //sh 'docker login $IMAGE_REG -u $HARBOR_CREDS_USR -p $HARBOR_CREDS_PSW'
                         docker.withRegistry("https://${IMAGE_REGISTRY}") {
@@ -88,7 +84,7 @@ pipeline {
             steps{
                 container('docker') {
                     script{
-                        withKubeCredentials([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
+                        withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
                             // sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
                             withEnv(["IMAGE_REGISTRY=${IMAGE_REGISTRY}",
                                     "IMAGE_PROJECT=${IMAGE_PROJECT}",
