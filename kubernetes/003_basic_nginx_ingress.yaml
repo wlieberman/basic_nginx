@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: basic_nginx
+  name: basic-nginx
   labels:
-    name: basic_nginx
+    name: basic-nginx
 spec:
   rules:
   - host: ${APPLICATION_FQDN}
@@ -13,6 +13,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: basic_nginx
+            name: basic-nginx
             port: 
               number: 80

@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: basic_nginx
+  name: basic-nginx
 spec:
   selector:
     matchLabels:
-      app: basic_nginx
+      app: basic-nginx
   template:
     metadata:
       labels:
-        app: basic_nginx
+        app: basic-nginx
     spec:
       containers:
-      - name: basic_nginx
+      - name: basic-nginx
         image: ${IMAGE_REGISTRY}/${IMAGE_PROJECT}/${IMAGE_REPOSITORY}:${IMAGE_TAG}
         resources:
           limits:
