@@ -75,7 +75,7 @@ pipeline {
             steps{
                 container('kubectl') {
                     script{
-                        sh "kubectl apply -n ${NAMESPACE} -f kubernetes"
+                        sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*"
                     }
                 }
             }
