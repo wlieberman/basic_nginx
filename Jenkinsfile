@@ -27,7 +27,8 @@ pipeline {
                         sh 'curl -LO https://dl.k8s.io/release/v1.25.9/bin/linux/amd64/kubectl'
                         sh 'chmod +x kubectl'
                         sh 'pwd'
-                        sh 'echo "export PATH=$PATH:/home/jenkins/agent/workspace/basic_nginx_main" >> /home/jenkins/.bashrc'
+                        sh 'echo \"export PATH=$PATH:/home/jenkins/agent/workspace/basic_nginx_main\" >> /home/jenkins/.bashrc'
+                        sh 'sleep 600'
                     }
                 }
             }
