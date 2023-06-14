@@ -84,7 +84,10 @@ pipeline {
             steps{
                 container('docker') {
                     script{
-                        withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://rancher.billylieberman.com']) {
+                        withKubeConfig([credentialsId: 'jenkins-deploy',
+                                serverUrl: 'https://rancher.billylieberman.com/k8s/clusters/c-m-tqd9slwr',
+                                clusterName: 'downstream1',
+                                contextName: 'downstream1']) {
                             // sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
                             withEnv(["IMAGE_REGISTRY=${IMAGE_REGISTRY}",
                                     "IMAGE_PROJECT=${IMAGE_PROJECT}",
