@@ -73,8 +73,10 @@ pipeline {
 
         stage('Deploy to Development') {
             steps{
-                script{
-                    sh "kubectl apply -n ${NAMESPACE} -f kubernetes"
+                container('kubectl') {
+                    script{
+                        sh "kubectl apply -n ${NAMESPACE} -f kubernetes"
+                    }
                 }
             }
         }
