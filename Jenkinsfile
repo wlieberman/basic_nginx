@@ -18,6 +18,15 @@ pipeline {
     }
 
     stages { 
+        stage('daemon.json') {
+            steps {
+                container ('docker') {
+                    script {
+                        sh 'cat /etc/docker/daemon.json'
+                    }
+                }
+            }
+        }
         stage('Build') {
             steps {
                 container ('docker') {
