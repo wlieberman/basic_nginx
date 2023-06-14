@@ -58,7 +58,7 @@ pipeline {
                         // sh 'echo username: $HARBOR_CREDS_USR'
                         sh 'echo $REG_PW | docker login $IMAGE_REG -u $REG_USR --password-stdin'
                         //sh 'docker login $IMAGE_REG -u $HARBOR_CREDS_USR -p $HARBOR_CREDS_PSW'
-                        docker.withRegistry("https://${IMAGE_REGISTRY}",) {
+                        docker.withRegistry("https://${IMAGE_REGISTRY}") {
                             docker_image.push(${IMAGE_TAG})
                             docker_image.push("latest")
                         }
