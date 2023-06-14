@@ -49,7 +49,6 @@ pipeline {
             environment {
                 HARBOR_CREDS = credentials('harbor-jenkins')
                 IMAGE_REG = "$IMAGE_REGISTRY"
-                DOCKER_TLS_VERIFY=0
             }
             steps {
                 container ('docker') {
