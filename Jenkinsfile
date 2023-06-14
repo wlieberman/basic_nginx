@@ -60,7 +60,7 @@ pipeline {
                         //sh 'docker login $IMAGE_REG -u $HARBOR_CREDS_USR -p $HARBOR_CREDS_PSW'
                         withCredentials([usernamePassword( credentialsId: 'harbor-jenkins', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             docker.withRegistry("https://${IMAGE_REGISTRY}", 'harbor-jenkins') {
-                                sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                                sh "cat $PASSWORD | docker login -u ${USERNAME} --password-stdin" 
                                 docker_image.push(${IMAGE_TAG})
                                 docker_image.push("latest")
                             }
