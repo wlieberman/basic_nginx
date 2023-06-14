@@ -6,7 +6,7 @@ metadata:
     name: basic_nginx
 spec:
   rules:
-  - host: basic-nginx.downstream.billylieberman.com
+  - host: ${APPLICATION_FQDN}
     http:
       paths:
       - pathType: Prefix

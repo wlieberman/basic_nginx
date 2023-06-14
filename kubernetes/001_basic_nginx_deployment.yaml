@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: basic_nginx
-        image: basic_nginx:0.0.1
+        image: ${IMAGE_REGISTRY}/${IMAGE_PROJECT}/${IMAGE_REPOSITORY}:${IMAGE_TAG}
         resources:
           limits:
             memory: "128Mi"

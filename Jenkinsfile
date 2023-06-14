@@ -1,3 +1,5 @@
+APPLICATION_FQDN = 'nginx.downstream.billylieberman.com'
+NAMESPACE = "basic_nginx"
 IMAGE_PROJECT = "basic_nginx"
 IMAGE_REPOSITORY = "basic_nginx"
 IMAGE_REGISTRY = "harbor.downstream.billylieberman.com"
@@ -69,7 +71,13 @@ pipeline {
             
         }
 
-        // stage('Deploy to Development') {}
+        stage('Deploy to Development') {
+            steps{
+                script{
+                    kubernetesDeploy(configs: "kubernetes/*")
+                }
+            }
+        }
         // stage('Integration Tests') {}
         // stage('Promote') {}
         // stage('Deploy to Production') {}
