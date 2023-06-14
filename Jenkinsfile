@@ -74,7 +74,7 @@ pipeline {
         stage('Deploy to Development') {
             steps{
                 script{
-                    kubernetesDeploy(configs: "kubernetes/*")
+                    sh "kubectl apply -n ${NAMESPACE} -f kubernetes"
                 }
             }
         }
