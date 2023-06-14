@@ -57,10 +57,10 @@ pipeline {
                         // sh "docker login -u ${}"
                         // sh 'echo username: $HARBOR_CREDS_USR'
                         sh 'echo $HARBOR_CREDS_PSW | docker login $IMAGE_REG -u $HARBOR_CREDS_USR --password-stdin'
-                        docker.withRegistry("http://${IMAGE_REGISTRY}") {
-                            docker_image.push(${IMAGE_TAG})
-                            docker_image.push("latest")
-                        }
+                        // docker.withRegistry("http://${IMAGE_REGISTRY}") {
+                            // docker_image.push(${IMAGE_TAG})
+                            // docker_image.push("latest")
+                        // }
                     }
                 }
             }
