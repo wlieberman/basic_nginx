@@ -20,6 +20,16 @@ pipeline {
     }
 
     stages { 
+        stage('Initialize') {
+            steps{
+                container ('jnlp') {
+                    script {
+                        sh 'curl -LO https://dl.k8s.io/release/v1.25.9/bin/linux/amd64/kubectl'
+                        sh 'chmod +x kubectl'
+                    }
+                }
+            }
+        }
         stage('Build') {
             steps {
                 container ('docker') {
