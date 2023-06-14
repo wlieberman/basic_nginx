@@ -90,7 +90,12 @@ pipeline {
                     script{
                         withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
                             // sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
-                            sh "envsubst < kubernetes/001_basic_nginx_deployment.yaml | kubectl -n ${NAMESPACE} -f -"
+                            withEnv(["IMAGE_REGISTRY=${IMAGE_REGISTRY}",
+                                    "IMAGE_PROJECT=${IMAGE_PROJECT}",
+                                    "IMAGE_REPOSITORY=${IMAGE_REPOSITORY}",
+                                    "IMAGE_TAG=${IMAGE_TAG}"]) {
+                                sh "envsubst < kubernetes/001_basic_nginx_deployment.yaml | kubectl -n ${NAMESPACE} -f -"
+                            }
                         }
                     }
                 }
