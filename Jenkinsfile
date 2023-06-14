@@ -5,8 +5,8 @@ IMAGE_TAG = "${env.BUILD_ID}"
 // docker push harbor.downstream.billylieberman.com/basic_nginx/REPOSITORY[:TAG]
 IMAGE_NAME="${IMAGE_REGISTRY}/${IMAGE_PROJECT}/${IMAGE_REPOSITORY}:${env.BUILD_ID}"
 
-REGISTRY_CREDENTIALS_ID = credentials('harbor-jenkins-username')
-REGISTRY_CREDENTIALS_PW = credentials('harbor-jenkins-pw')
+//REGISTRY_CREDENTIALS_ID = credentials('harbor-jenkins-username')
+//REGISTRY_CREDENTIALS_PW = credentials('harbor-jenkins-pw')
 //REGISTRY_CREDENTIALS = credentials('harbor-jenkins')
 
 pipeline {
@@ -19,12 +19,15 @@ pipeline {
 
     stages { 
         stage('Build') {
+            environment {
+                HARBOR_CREDS = credentials('harbor-jenkins')
+            }
             steps {
                 container ('docker') {
                     script {
-                        // checkout scm
-                        docker_image = docker.build("${IMAGE_NAME}")
-                        // sh "ls -la"
+                        echo "username: $HARBOR_CREDS_USR"
+                        echo "password: $HARBOR_CREDS_PSW"
+                        //docker_image = docker.build("${IMAGE_NAME}")
                     }
                 }
             }
@@ -56,13 +59,15 @@ pipeline {
                         // environment {
                             // DOCKER_TLS_VERIFY=0
                         // }
-                        environment {
-                            REGISTRY_CREDENTIALS = credentials('harbor-jenkins')
-                        }
-                        docker.withRegistry("http://${IMAGE_REGISTRY}", $REGISTRY_CREDENTIALS) {
-                            docker_image.push(${IMAGE_TAG})
-                            docker_image.push("latest")
-                        }
+                        //environment {
+                            //REGISTRY_CREDENTIALS = credentials('harbor-jenkins')
+                            //withCredentials([usernamePassword(credentialsId: 'harbor-jenkins', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
+                        //}
+                        sh 'echo username: $USERNAME'
+                        //docker.withRegistry("http://${IMAGE_REGISTRY}", $REGISTRY_CREDENTIALS) {
+                            //docker_image.push(${IMAGE_TAG})
+                            //docker_image.push("latest")
+                        //}
                     }
                 }
             }
