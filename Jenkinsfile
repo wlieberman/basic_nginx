@@ -22,7 +22,7 @@ pipeline {
             steps {
                 container ('docker') {
                     script {
-                        sh 'cat /etc/docker/daemon.json'
+                        sh 'sleep 600'
                     }
                 }
             }
