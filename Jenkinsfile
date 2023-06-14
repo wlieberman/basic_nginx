@@ -48,7 +48,7 @@ pipeline {
         stage('Push') {
             environment {
                 HARBOR_CREDS = credentials('harbor-jenkins')
-                IMAGE_REG = $IMAGE_REGISTRY
+                IMAGE_REG = "$IMAGE_REGISTRY"
             }
             steps {
                 container ('docker') {
