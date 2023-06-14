@@ -1,5 +1,5 @@
 APPLICATION_FQDN = 'nginx.downstream.billylieberman.com'
-NAMESPACE = "basic_nginx"
+NAMESPACE = "basic-nginx"
 IMAGE_PROJECT = "basic_nginx"
 IMAGE_REPOSITORY = "basic_nginx"
 IMAGE_REGISTRY = "harbor.downstream.billylieberman.com"
