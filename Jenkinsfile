@@ -86,7 +86,7 @@ pipeline {
             steps{
                 container('jnlp') {
                     script{
-                        sh 'export PATH=$PATH:.'
+                        sh 'export PATH=$PATH:/home/jenkins/agent/workspace/basic_nginx_main'
                         withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
                             sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
                         }
