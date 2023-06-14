@@ -84,7 +84,7 @@ pipeline {
             steps{
                 container('docker') {
                     script{
-                        withKubeConfig([credentialsId: 'jenkins-deploy',
+                        withKubeConfig([credentialsId: 'jenkins-deploy-token',
                                 serverUrl: 'https://rancher.billylieberman.com/k8s/clusters/c-m-tqd9slwr',
                                 clusterName: 'downstream1',
                                 contextName: 'downstream1']) {
