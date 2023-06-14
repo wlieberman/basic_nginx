@@ -73,15 +73,14 @@ pipeline {
 
         stage('Deploy to Development') {
             steps{
-                withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
-                    sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
+                container('kubectl') {
+                    script{
+                        withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
+                            sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
+                        }
+                    }
                 }
-                // container('kubectl') {
-                    // script{
-                        // //sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*"
-                        // sh "kubectl get pod -n jenkins"
-                    // }
-                // }
+                
             }
         }
         // stage('Integration Tests') {}
