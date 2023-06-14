@@ -26,6 +26,7 @@ pipeline {
                     script {
                         sh 'curl -LO https://dl.k8s.io/release/v1.25.9/bin/linux/amd64/kubectl'
                         sh 'chmod +x kubectl'
+                        sh 'mv kubectl /usr/bin'
                     }
                 }
             }
