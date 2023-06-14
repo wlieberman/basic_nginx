@@ -18,15 +18,6 @@ pipeline {
     }
 
     stages { 
-        stage('daemon.json') {
-            steps {
-                container ('docker') {
-                    script {
-                        sh 'sleep 600'
-                    }
-                }
-            }
-        }
         stage('Build') {
             steps {
                 container ('docker') {
