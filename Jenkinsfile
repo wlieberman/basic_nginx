@@ -73,8 +73,9 @@ pipeline {
 
         stage('Deploy to Development') {
             steps{
-                env.PIPELINE_NAMESPACE = "${NAMESPACE}"
-                kubernetesDeploy kubeconfigId: 'kubernetes', configs: 'kubernetes/*.yaml'
+                withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
+                    sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
+                }
                 // container('kubectl') {
                     // script{
                         // //sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*"
