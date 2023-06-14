@@ -89,7 +89,8 @@ pipeline {
                 container('docker') {
                     script{
                         withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
-                            sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
+                            // sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
+                            sh "envsubst < kubernetes/001_basic_nginx_deployment.yaml | kubectl -n ${NAMESPACE} -f -"
                         }
                     }
                 }
