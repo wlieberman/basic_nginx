@@ -85,11 +85,11 @@ pipeline {
         }
 
         stage('Deploy to Development') {
+            environment {
+                PATH='$PATH:/home/jenkins/agent/workspace/basic_nginx_main'
+            }
             steps{
                 container('jnlp') {
-                    environment {
-                        PATH='$PATH:/home/jenkins/agent/workspace/basic_nginx_main'
-                    }
                     script{
                         withKubeConfig([credentialsId: 'jenkins-deploy', serverUrl: 'https://kubernetes.default']) {
                             sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
