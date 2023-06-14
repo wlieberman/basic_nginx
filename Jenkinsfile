@@ -73,12 +73,14 @@ pipeline {
 
         stage('Deploy to Development') {
             steps{
-                container('kubectl') {
-                    script{
-                        //sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*"
-                        sh "kubectl get pod -n jenkins"
-                    }
-                }
+                env.PIPELINE_NAMESPACE = "${NAMESPACE}"
+                kubernetesDeploy kubeconfigId: 'kubernetes', configs: 'kubernetes/*.yaml'
+                // container('kubectl') {
+                    // script{
+                        // //sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*"
+                        // sh "kubectl get pod -n jenkins"
+                    // }
+                // }
             }
         }
         // stage('Integration Tests') {}
