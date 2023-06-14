@@ -58,9 +58,12 @@ pipeline {
                         // sh 'echo username: $HARBOR_CREDS_USR'
                         //sh 'echo $HARBOR_CREDS_PSW | docker login $IMAGE_REG -u $HARBOR_CREDS_USR --password-stdin'
                         //sh 'docker login $IMAGE_REG -u $HARBOR_CREDS_USR -p $HARBOR_CREDS_PSW'
-                        docker.withRegistry("https://${IMAGE_REGISTRY}", 'harbor-jenkins') {
-                            docker_image.push(${IMAGE_TAG})
-                            docker_image.push("latest")
+                        withCredentials([usernamePassword( credentialsId: 'harbor-jenkins', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                            docker.withRegistry("https://${IMAGE_REGISTRY}", 'harbor-jenkins') {
+                                sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                                docker_image.push(${IMAGE_TAG})
+                                docker_image.push("latest")
+                            }
                         }
                     }
                 }
