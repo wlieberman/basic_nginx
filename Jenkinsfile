@@ -94,7 +94,8 @@ pipeline {
                                     "IMAGE_PROJECT=${IMAGE_PROJECT}",
                                     "IMAGE_REPOSITORY=${IMAGE_REPOSITORY}",
                                     "IMAGE_TAG=${IMAGE_TAG}"]) {
-                                sh "envsubst < kubernetes/001_basic_nginx_deployment.yaml | kubectl -n ${NAMESPACE} apply -f -"
+                                // sh "envsubst < kubernetes/001_basic_nginx_deployment.yaml | kubectl -n ${NAMESPACE} apply -f -"
+                                sh 'kubectl get pod -n jenkins'
                             }
                         }
                     }
