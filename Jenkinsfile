@@ -80,32 +80,32 @@ pipeline {
             
         }
 
-        stage('Deploy to Development') {
-            steps{
-                container('docker') {
-                    script{
-                        withKubeConfig([credentialsId: 'jenkins-deploy-token',
-                                serverUrl: 'https://rancher.billylieberman.com/k8s/clusters/c-m-tqd9slwr',
-                                clusterName: 'downstream1',
-                                contextName: 'downstream1']) {
-                            // sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
-                            withEnv(["IMAGE_REGISTRY=${IMAGE_REGISTRY}",
-                                    "IMAGE_PROJECT=${IMAGE_PROJECT}",
-                                    "IMAGE_REPOSITORY=${IMAGE_REPOSITORY}",
-                                    "IMAGE_TAG=${IMAGE_TAG}"]) {
-                                sh "envsubst < kubernetes/001_basic_nginx_deployment.yaml | kubectl -n ${NAMESPACE} apply -f -"
-                                // sh 'kubectl config view'
-                                // sh 'kubectl get pod -n jenkins'
-                            }
-                        }
-                    }
-                }
-                // container('docker') {
-                    // sh "docker run rancher/kubectl:v1.24.14 apply -n ${NAMESPACE} -f kubernetes/*.yaml"
-                // }
+        //    stage('Deploy to Development') {
+            //    steps{
+                //    container('docker') {
+                    //    script{
+                        //    withKubeConfig([credentialsId: 'jenkins-deploy-token',
+                                //    serverUrl: 'https://rancher.billylieberman.com/k8s/clusters/c-m-tqd9slwr',
+                                //    clusterName: 'downstream1',
+                                //    contextName: 'downstream1']) {
+                            //    // sh "kubectl apply -n ${NAMESPACE} -f kubernetes/*.yaml"
+                            //    withEnv(["IMAGE_REGISTRY=${IMAGE_REGISTRY}",
+                                    //    "IMAGE_PROJECT=${IMAGE_PROJECT}",
+                                    //    "IMAGE_REPOSITORY=${IMAGE_REPOSITORY}",
+                                    //    "IMAGE_TAG=${IMAGE_TAG}"]) {
+                                //    sh "envsubst < kubernetes/001_basic_nginx_deployment.yaml | kubectl -n ${NAMESPACE} apply -f -"
+                                //    // sh 'kubectl config view'
+                                //    // sh 'kubectl get pod -n jenkins'
+                            //    }
+                        //    }
+                    //    }
+                //    }
+                //    // container('docker') {
+                    //    // sh "docker run rancher/kubectl:v1.24.14 apply -n ${NAMESPACE} -f kubernetes/*.yaml"
+                //    // }
                 
-            }
-        }
+            //    }
+        //    }
         // stage('Integration Tests') {}
         // stage('Promote') {}
         // stage('Deploy to Production') {}
