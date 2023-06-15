@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: basic-nginx
-        image: ${IMAGE_REGISTRY}/${IMAGE_PROJECT}/${IMAGE_REPOSITORY}:${IMAGE_TAG}
+        image: harbor.downstream.billylieberman.com/basic_nginx/basic_nginx:latest
         resources:
           limits:
             memory: "128Mi"
